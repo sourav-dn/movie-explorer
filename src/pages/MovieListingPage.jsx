@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import MovieCard from '../components/MovieCard';
-import { SearchIcon, XMarkIcon, RefreshIcon, StarIcon, FilterIcon } from '../components/Icons';
+import { SearchIcon, XMarkIcon, RefreshIcon } from '../components/Icons';
 import { fetchShows, searchShows } from '../services/api';
 
 const POPULAR_GENRES = [
