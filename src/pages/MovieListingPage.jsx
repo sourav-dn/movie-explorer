@@ -22,7 +22,7 @@ export default function MovieListingPage({ onSelectMovie }) {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedGenre, setSelectedGenre] = useState('All');
-  const [sortBy, setSortBy] = useState('rating-desc'); // 'rating-desc' | 'year-desc' | 'title-asc'
+  const [sortBy, setSortBy] = useState('rating-desc');
   const [currentPage, setCurrentPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
@@ -37,7 +37,6 @@ export default function MovieListingPage({ onSelectMovie }) {
         setLoading(true);
       }
       setError(null);
-
       const shows = await fetchShows(page);
       if (shows.length === 0) {
         setHasMore(false);
@@ -53,7 +52,6 @@ export default function MovieListingPage({ onSelectMovie }) {
     }
   }, []);
 
-  // Search shows via TVMaze /search/shows?q=:query
   const performSearch = useCallback(async (query) => {
     if (!query.trim()) {
       loadShows(0, false);
@@ -74,12 +72,12 @@ export default function MovieListingPage({ onSelectMovie }) {
     }
   }, [loadShows]);
 
-  // Initial fetch on mount
+
   useEffect(() => {
     loadShows(0, false);
   }, [loadShows]);
 
-  // Debounced search effect as user types
+  
   useEffect(() => {
     const handler = setTimeout(() => {
       if (searchQuery.trim()) {
@@ -110,7 +108,7 @@ export default function MovieListingPage({ onSelectMovie }) {
     }
   };
 
-  // Filter and sort the loaded movies
+
   const filteredAndSortedMovies = useMemo(() => {
     let result = [...movies];
 
@@ -187,10 +185,8 @@ export default function MovieListingPage({ onSelectMovie }) {
         </div>
       </div>
 
-      {/* Filter & Sort Bar */}
+      
       <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 pb-6 mb-8 border-b border-slate-800">
-        
-        {/* Genre Pills */}
         <div className="flex items-center gap-2 overflow-x-auto w-full lg:w-auto pb-2 lg:pb-0 scrollbar-none">
           {POPULAR_GENRES.map((genre) => (
             <button
@@ -295,7 +291,6 @@ export default function MovieListingPage({ onSelectMovie }) {
           )}
         </div>
       ) : (
-        /* Empty State */
         <div className="text-center py-20 px-4 bg-slate-900/40 rounded-3xl border border-slate-800 my-8">
           <div className="w-16 h-16 mx-auto rounded-2xl bg-slate-800/80 border border-slate-700 flex items-center justify-center text-amber-400 mb-4">
             <SearchIcon className="w-8 h-8" />
